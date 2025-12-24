@@ -1,13 +1,5 @@
-import { useSingleMutation } from "@/src/api/hooks/useSingleMutation";
-import { bankHolidayAPI } from "../api/bank_holiday.api";
+import { bankHolidayStore } from "../stores/bank_holiday.store";
 
-export function useGetBankHolidays() {
-    return useSingleMutation({
-        mutationFn: () =>
-            bankHolidayAPI.get_bank_holidays(),
-
-        onSuccess: (data) => {
-            console.log(data)
-        },
-    })
+export const useBankHolidays = <T>(selector: (s: ReturnType<typeof bankHolidayStore.getState>) => T): T => {
+        return bankHolidayStore(selector);
 }

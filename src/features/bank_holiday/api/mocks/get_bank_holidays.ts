@@ -3,7 +3,6 @@ import { HandlerContext } from "@/src/api/mock/factory";
 export const get_bank_holidays = {
     delay: 1200,
     handler: async (_: HandlerContext) => {
-        console.log("Inside mock call")
         return JSON_RESPONSE
     }
 };
