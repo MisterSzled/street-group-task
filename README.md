@@ -1,6 +1,6 @@
-# React Native Template
+# React Native Task - Street Group
 
-A modern React Native template built with a feature-driven domain architecture.
+A modern React Native stack with feature-driven domain architecture.
 
 Framework & Routing
 - Expo
@@ -32,23 +32,13 @@ Testing
 
 ------------------------------------------------------------
 
-## Guide
+### Comments
 
-### API
+I was given 96h on the 23rd of December to do this.
+I was travelling on the 23rd and obviously am busy 25/26 - so I could only give this a day.
+Additionally I've been on my laptop without my device integrations so i've mostly been targetting web for test while otherwise continuing my normal practise.
 
-Adding a New API Call in a Feature Domain
+Offline storage for all dates which are invalidatd after one week.
+If you pull to refresh (or button on web) it will invalidate the cache.
 
-- Create a contract describing request/response types: src/features/{domain}/api/{domain}.contract.ts
-
-- Implement the contract: src/features/{domain}/api/{domain}.api.ts
-
-- 
-        - Add default mocks: src/features/{domain}/api/{domain}.mock.ts
-        - Add specific call mocks: src/features/{domain}/api/mocks/{call_name}.ts
-        - Register mocks in the mock registry: src/api/mock/mocks.ts
-
-- Create a hook wrapping your API call: src/features/{domain}/hooks/use{CallName}.ts
-
-- Use the Hook in Your Page/Component const { data, isLoading, error } = useProducts();
-
-------------------------------------------------------------
+Editted holidays will be over written on canche invalidation currently.
