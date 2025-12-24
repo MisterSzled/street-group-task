@@ -24,9 +24,6 @@ const styles = StyleSheet.create(({ tokens }) => ({
                 width: 400,
                 maxWidth: 400,
                 flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "center",
-                backgroundColor: "blue"
         },
 }));
 
