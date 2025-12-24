@@ -1,8 +1,8 @@
 import { useSingleMutation } from "@/src/api/hooks/useSingleMutation";
 import { bankHolidayAPI } from "../api/bank_holiday.api";
 import { filter_bank_holidays } from "../api/middleware/filter_bank_holidays";
-import { useBankHolidays } from "./useBankHolidays";
 import { StoreCountryEvent } from "../types";
+import { useBankHolidays } from "./useBankHolidays";
 
 const STALE_TIME = 7 * 24 * 60 * 60 * 1000;
 
@@ -18,10 +18,14 @@ export function useGetBankHolidays() {
         const bank_holiday_store = useBankHolidays((s) => s);
 
         return useSingleMutation({
-                mutationFn: async () => {
+                mutationFn: async ({ force_invalidate }: { force_invalidate?: boolean } = {}) => {
                         const time_now = new Date().getTime();
 
-                        if (!!bank_holiday_store.bank_holidays && !!bank_holiday_store.last_fetched) {
+                        if (
+                                !force_invalidate &&
+                                !!bank_holiday_store.bank_holidays &&
+                                !!bank_holiday_store.last_fetched
+                        ) {
                                 if (time_now < bank_holiday_store.last_fetched + STALE_TIME) {
                                         return bank_holiday_store.bank_holidays;
                                 }
