@@ -1,29 +1,23 @@
-import { useAuth } from "@src/features/auth/hooks/useAuth";
-import { useLogin } from "@src/features/auth/hooks/useLogin";
 import { useTranslation } from "react-i18next";
 import { View } from "react-native";
-import { StyleSheet, useUnistyles } from "react-native-unistyles";
-import Button from "../__core/components/Button";
+import { StyleSheet } from "react-native-unistyles";
+import { useGetBankHolidays } from "../features/bank_holiday/hooks/useBankHolidays";
+import { useEffect } from "react";
 
 const index = () => {
         const { t } = useTranslation();
-        const { isAuthenticated } = useAuth((s) => s);
-        const { mutate: login, isPending } = useLogin();
-        const { theme } = useUnistyles()
 
-        const handleLogin = () => {
-                return
-        }
+        const { mutate: getBankHolidays, isPending } = useGetBankHolidays();
+
+        useEffect(() => {
+                getBankHolidays()
+        }, [])
 
         return (
-                <View
-                        style={styles.container}
-                >
-                        <Button.Root onPress={handleLogin} >
-                                <Button.Text>Login</Button.Text>
-                        </Button.Root>
+                <View style={styles.container}>
+                        {/* {t("bank_holiday.header")} */}
                 </View>
-        )
+        );
 }
 
 const styles = StyleSheet.create(({ colors }) => ({

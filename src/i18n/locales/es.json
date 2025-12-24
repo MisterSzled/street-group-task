@@ -1,5 +1,8 @@
 {
         "translation": {
-                "welcome": "Bienvenido"
+                "welcome": "Bienvenido",
+                "bank_holiday": {
+                        "header": "Bank Holidays"
+                }
         }
 }
