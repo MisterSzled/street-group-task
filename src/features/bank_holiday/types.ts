@@ -5,6 +5,10 @@ export interface CountryEvent {
     bunting: boolean;
 }
 
+export interface StoreCountryEvent extends CountryEvent {
+    slug: string
+}
+
 export interface CountryEvents {
     division: string;
     events: CountryEvent[];

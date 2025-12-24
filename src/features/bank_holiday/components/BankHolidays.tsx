@@ -3,11 +3,11 @@ import { Refresh } from "iconoir-react-native";
 import { useState } from "react";
 import { FlatList, Platform, RefreshControl, View } from "react-native";
 import { StyleSheet } from "react-native-unistyles";
-import { CountryEvent } from "../types";
+import { StoreCountryEvent } from "../types";
 import BankHolidayEvent from "./BankHolidayEvent";
 
 interface Props {
-        bank_holidays: CountryEvent[],
+        bank_holidays: StoreCountryEvent[],
         is_pending: boolean,
         refresh: () => void
 }
@@ -27,7 +27,7 @@ export const BankHolidays = ({ bank_holidays, is_pending, refresh }: Props) => {
         return <View style={styles.container}>
 
                 {Platform.OS === "web" &&
-                        <Button.Root onPress={handleRefresh} styles={[{marginBottom: 20}]}>
+                        <Button.Root onPress={handleRefresh} styles={[{ marginBottom: 20 }]}>
                                 <Button.Icon>
                                         <Refresh color={"black"} />
                                 </Button.Icon>

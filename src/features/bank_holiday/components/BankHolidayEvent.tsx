@@ -1,27 +1,18 @@
-import { Redirect, useRouter } from "expo-router";
+import { useRouter } from "expo-router";
 import { Pressable, Text } from "react-native";
 import { StyleSheet } from "react-native-unistyles";
-import { CountryEvent } from "../types";
+import { StoreCountryEvent } from "../types";
 
 
 interface Props {
-        bank_holiday_event: CountryEvent
-}
-
-function slugify(input: string): string {
-        return input
-                .toLowerCase()
-                .replace(/[^a-z0-9\s]/g, "")
-                .trim()
-                .replaceAll(" ", "-");
+        bank_holiday_event: StoreCountryEvent
 }
 
 export const BankHolidayEvent = ({ bank_holiday_event }: Props) => {
         const router = useRouter();
 
         const handleRoute = () => {
-                let slug = slugify(bank_holiday_event.title);
-                router.push(`/event/${slug}`);
+                router.push(`/event/${bank_holiday_event.slug}`);
 
         }
 

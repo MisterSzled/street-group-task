@@ -2,13 +2,20 @@ import { useSingleMutation } from "@/src/api/hooks/useSingleMutation";
 import { bankHolidayAPI } from "../api/bank_holiday.api";
 import { filter_bank_holidays } from "../api/middleware/filter_bank_holidays";
 import { useBankHolidays } from "./useBankHolidays";
+import { StoreCountryEvent } from "../types";
 
 const STALE_TIME = 7 * 24 * 60 * 60 * 1000;
 
+function slugify(input: string): string {
+        return input
+                .toLowerCase()
+                .replace(/[^a-z0-9\s]/g, "")
+                .trim()
+                .replaceAll(" ", "-");
+}
+
 export function useGetBankHolidays() {
         const bank_holiday_store = useBankHolidays((s) => s);
-
-        console.log("Called")
 
         return useSingleMutation({
                 mutationFn: async () => {
@@ -26,7 +33,12 @@ export function useGetBankHolidays() {
                         if (filitered_events === null) {
                                 bank_holiday_store.set_bank_holidays([])
                         } else {
-                                bank_holiday_store.set_bank_holidays(filitered_events)
+                                const store_events = filitered_events.map(event => ({
+                                        ...event,
+                                        slug: slugify(event.title)
+                                })) as StoreCountryEvent[];
+
+                                bank_holiday_store.set_bank_holidays(store_events);
                         }
                 },
 
