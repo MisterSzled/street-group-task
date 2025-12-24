@@ -34,8 +34,8 @@ export function useGetBankHolidays() {
                         const data = await bankHolidayAPI.get_bank_holidays();
                         const filitered_events = filter_bank_holidays(data);
 
-                        if (filitered_events === null) {
-                                bank_holiday_store.set_bank_holidays([])
+                        if (data === null || filitered_events === null) {
+                                bank_holiday_store.set_bank_holidays([]);
                         } else {
                                 const store_events = filitered_events.map(event => ({
                                         ...event,
