@@ -1,14 +1,14 @@
 import { storage } from "@src/lib/mmkv";
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
-import { BankHolidays } from "../types";
+import { BankHolidays, CountryEvent } from "../types";
 
 export type BankHolidayState = {
-    bank_holidays: BankHolidays | null
+    bank_holidays: CountryEvent[] | null
 };
 
 export type BankHolidayActions = {
-    set_bank_holidays: (bank_holidays: BankHolidays | null) => void;
+    set_bank_holidays: (bank_holidays: CountryEvent[] | null) => void;
 };
 
 export type BankHolidayStore = BankHolidayState & BankHolidayActions;
@@ -27,7 +27,7 @@ export const bankHolidayStore = create<BankHolidayStore>()(
         (set) => ({
             bank_holidays: null,
 
-            set_bank_holidays: (bank_holidays: BankHolidays | null) => {
+            set_bank_holidays: (bank_holidays: CountryEvent[] | null) => {
                 set({
                     bank_holidays
                 })

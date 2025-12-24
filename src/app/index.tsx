@@ -15,7 +15,7 @@ const index = () => {
                 getBankHolidays();
         }, []);
 
-        console.log(bank_holidays)
+        console.log("Bank holidays: ", bank_holidays);
 
         return (
                 <View style={styles.container}>
