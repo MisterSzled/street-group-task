@@ -85,7 +85,7 @@ export const BankHolidays = ({ bank_holidays, is_pending, refresh }: Props) => {
                                         <View style={styles.wrapper}>
                                                 <BankHolidayEvent bank_holiday_event={item} />
 
-                                                <Button.Root styles={styles.button} onPress={() => addToCalendar(item)}>
+                                                <Button.Root styles={styles.button} onPress={() => addToCalendar(item)} animation={"bounce"}>
                                                         <Button.Icon>
                                                                 <Calendar />
                                                         </Button.Icon>

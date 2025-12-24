@@ -5,7 +5,7 @@ import { useBankHolidays } from '@/src/features/bank_holiday/hooks/useBankHolida
 import { useGetBankHolidays } from '@/src/features/bank_holiday/hooks/useGetBankHolidays';
 import { StoreCountryEvent } from '@/src/features/bank_holiday/types';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { act, renderHook } from '@testing-library/react-hooks';
+import { renderHook } from '@testing-library/react-hooks';
 
 jest.mock('@/src/features/bank_holiday/api/bank_holiday.api');
 jest.mock('@/src/features/bank_holiday/api/middleware/filter_bank_holidays');
@@ -24,8 +24,6 @@ describe('useGetBankHolidays', () => {
                 last_fetched: null,
                 set_bank_holidays: mockSetBankHolidays,
         };
-
-        const queryClient = new QueryClient();
 
         const wrapper = ({ children }: { children: React.ReactNode }) => {
                 const queryClient = new QueryClient();
