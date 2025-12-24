@@ -1,4 +1,5 @@
-import { Text, View } from "react-native";
+import { Redirect, useRouter } from "expo-router";
+import { Pressable, Text } from "react-native";
 import { StyleSheet } from "react-native-unistyles";
 import { CountryEvent } from "../types";
 
@@ -7,13 +8,28 @@ interface Props {
         bank_holiday_event: CountryEvent
 }
 
-export const BankHolidayEvent = ({ bank_holiday_event }: Props) => {
+function slugify(input: string): string {
+        return input
+                .toLowerCase()
+                .replace(/[^a-z0-9\s]/g, "")
+                .trim()
+                .replaceAll(" ", "-");
+}
 
-        return <View style={styles.container}>
-                
+export const BankHolidayEvent = ({ bank_holiday_event }: Props) => {
+        const router = useRouter();
+
+        const handleRoute = () => {
+                let slug = slugify(bank_holiday_event.title);
+                router.push(`/event/${slug}`);
+
+        }
+
+        return <Pressable style={styles.container} onPress={handleRoute}>
+
                 <Text style={styles.text_header}>{bank_holiday_event.title} - {bank_holiday_event.date}</Text>
                 <Text>{bank_holiday_event.notes}</Text>
-        </View>;
+        </Pressable>;
 };
 
 const styles = StyleSheet.create(({ tokens, colors }) => ({

@@ -1,10 +1,10 @@
+import BankHolidays from "@src/features/bank_holiday/components/BankHolidays";
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { View } from "react-native";
 import { StyleSheet } from "react-native-unistyles";
-import { useEffect } from "react";
-import { useGetBankHolidays } from "../features/bank_holiday/hooks/useGetBankHolidays";
 import { useBankHolidays } from "../features/bank_holiday/hooks/useBankHolidays";
-import BankHolidays from "@src/features/bank_holiday/components/BankHolidays";
+import { useGetBankHolidays } from "../features/bank_holiday/hooks/useGetBankHolidays";
 
 const index = () => {
         const { t } = useTranslation();
@@ -19,12 +19,15 @@ const index = () => {
         console.log("Bank holidays: ", bank_holidays);
 
         return (
-                <View style={styles.container}>
-                        {/* {t("bank_holiday.header")} */}
-                        {bank_holidays &&
-                                <BankHolidays bank_holidays={bank_holidays} />
-                        }
-                </View>
+                <>
+                        <View style={styles.container}>
+                                <BankHolidays
+                                        bank_holidays={bank_holidays}
+                                        is_pending={isPending}
+                                        refresh={getBankHolidays} />
+                        </View>
+                </>
+
         );
 }
 

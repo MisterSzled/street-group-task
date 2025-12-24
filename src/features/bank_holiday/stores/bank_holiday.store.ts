@@ -4,12 +4,12 @@ import { createJSONStorage, persist } from "zustand/middleware";
 import { CountryEvent } from "../types";
 
 export type BankHolidayState = {
-    bank_holidays: CountryEvent[] | null,
+    bank_holidays: CountryEvent[],
     last_fetched: number | null
 };
 
 export type BankHolidayActions = {
-    set_bank_holidays: (bank_holidays: CountryEvent[] | null) => void;
+    set_bank_holidays: (bank_holidays: CountryEvent[]) => void;
 };
 
 export type BankHolidayStore = BankHolidayState & BankHolidayActions;
@@ -26,10 +26,10 @@ const storageAdapter = {
 export const bankHolidayStore = create<BankHolidayStore>()(
     persist(
         (set) => ({
-            bank_holidays: null,
+            bank_holidays: [],
             last_fetched: null,
 
-            set_bank_holidays: (bank_holidays: CountryEvent[] | null) => {
+            set_bank_holidays: (bank_holidays: CountryEvent[]) => {
                 set({
                     bank_holidays,
                     last_fetched: new Date().getTime()

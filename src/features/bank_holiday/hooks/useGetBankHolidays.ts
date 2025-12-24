@@ -8,13 +8,14 @@ const STALE_TIME = 7 * 24 * 60 * 60 * 1000;
 export function useGetBankHolidays() {
         const bank_holiday_store = useBankHolidays((s) => s);
 
+        console.log("Called")
+
         return useSingleMutation({
                 mutationFn: async () => {
                         const time_now = new Date().getTime();
 
                         if (!!bank_holiday_store.bank_holidays && !!bank_holiday_store.last_fetched) {
                                 if (time_now < bank_holiday_store.last_fetched + STALE_TIME) {
-                                        console.log("Cahced cal")
                                         return bank_holiday_store.bank_holidays;
                                 }
                         }
@@ -22,7 +23,11 @@ export function useGetBankHolidays() {
                         const data = await bankHolidayAPI.get_bank_holidays();
                         const filitered_events = filter_bank_holidays(data);
 
-                        bank_holiday_store.set_bank_holidays(filitered_events)
+                        if (filitered_events === null) {
+                                bank_holiday_store.set_bank_holidays([])
+                        } else {
+                                bank_holiday_store.set_bank_holidays(filitered_events)
+                        }
                 },
 
                 onSuccess: () => {

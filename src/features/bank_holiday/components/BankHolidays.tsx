@@ -1,19 +1,47 @@
-import { FlatList, View } from "react-native";
+import Button from "@/src/__core/components/Button";
+import { Refresh } from "iconoir-react-native";
+import { useState } from "react";
+import { FlatList, Platform, RefreshControl, View } from "react-native";
+import { StyleSheet } from "react-native-unistyles";
 import { CountryEvent } from "../types";
 import BankHolidayEvent from "./BankHolidayEvent";
-import { StyleSheet } from "react-native-unistyles";
 
 interface Props {
-        bank_holidays: CountryEvent[]
+        bank_holidays: CountryEvent[],
+        is_pending: boolean,
+        refresh: () => void
 }
 
-export const BankHolidays = ({ bank_holidays }: Props) => {
+export const BankHolidays = ({ bank_holidays, is_pending, refresh }: Props) => {
+        const [refreshing, setRefreshing] = useState(false);
+
+        const handleRefresh = async () => {
+                setRefreshing(true);
+                try {
+                        refresh()
+                } finally {
+                        setRefreshing(false)
+                }
+        }
 
         return <View style={styles.container}>
+
+                {Platform.OS === "web" &&
+                        <Button.Root onPress={handleRefresh} styles={[{marginBottom: 20}]}>
+                                <Button.Icon>
+                                        <Refresh color={"black"} />
+                                </Button.Icon>
+                        </Button.Root>
+                }
+
                 <FlatList
                         data={bank_holidays}
                         keyExtractor={(item) => item.title}
                         renderItem={({ item }) => <BankHolidayEvent bank_holiday_event={item} />}
+                        refreshControl={<RefreshControl
+                                refreshing={refreshing || is_pending}
+                                onRefresh={handleRefresh}
+                        />}
                 />
         </View>;
 };
