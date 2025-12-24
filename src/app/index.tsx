@@ -17,14 +17,12 @@ const index = () => {
         }, []);
 
         return (
-                <>
-                        <View style={styles.container}>
-                                <BankHolidays
-                                        bank_holidays={bank_holidays}
-                                        is_pending={isPending}
-                                        refresh={() => getBankHolidays({ force_invalidate: true })} />
-                        </View>
-                </>
+                <View style={styles.container}>
+                        <BankHolidays
+                                bank_holidays={bank_holidays}
+                                is_pending={isPending}
+                                refresh={() => getBankHolidays({ force_invalidate: true })} />
+                </View>
 
         );
 }
