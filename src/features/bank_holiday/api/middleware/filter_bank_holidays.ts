@@ -25,5 +25,5 @@ export function filter_bank_holidays(data: BankHolidays | null): CountryEvent[] 
         let ordered_dates = Object.values(events).sort((a, b) =>
                 new Date(a.date).getTime() - new Date(b.date).getTime());
 
-        return ordered_dates.slice(0, 6);
+        return ordered_dates.slice(0, 5);
 }
