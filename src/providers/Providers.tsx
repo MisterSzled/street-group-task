@@ -6,6 +6,7 @@ import Msw from "@/src/providers/Msw";
 import Query from "@/src/providers/Query";
 import { ReactNode } from "react";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import Toast from 'react-native-toast-message';
 import IconoirRoot from "./IcoNoir";
 
 export const Providers = ({ children }: { children: ReactNode }) => {
@@ -17,6 +18,7 @@ export const Providers = ({ children }: { children: ReactNode }) => {
                                                 <SafeAreaView style={{ flex: 1 }}>
                                                         {children}
                                                 </SafeAreaView>
+                                                <Toast />
                                         </SafeAreaProvider>
                                 </IconoirRoot>
                         </I18next>

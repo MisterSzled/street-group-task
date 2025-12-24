@@ -13,10 +13,8 @@ const index = () => {
         const { mutate: getBankHolidays, isPending } = useGetBankHolidays();
 
         useEffect(() => {
-                getBankHolidays({force_invalidate: false});
+                getBankHolidays({ force_invalidate: false });
         }, []);
-
-        console.log("Bank holidays: ", bank_holidays);
 
         return (
                 <>
@@ -24,7 +22,7 @@ const index = () => {
                                 <BankHolidays
                                         bank_holidays={bank_holidays}
                                         is_pending={isPending}
-                                        refresh={() => getBankHolidays({force_invalidate: true})} />
+                                        refresh={() => getBankHolidays({ force_invalidate: true })} />
                         </View>
                 </>
 
